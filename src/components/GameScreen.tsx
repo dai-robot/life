@@ -10,7 +10,7 @@ import {
   mapDistance,
 } from "@/lib/field";
 import { useFieldMovement, useKeyboardInput } from "@/hooks/useFieldMovement";
-import { useNpcWander } from "@/hooks/useNpcWander";
+import { useNpcWander, EMPTY_NPCS } from "@/hooks/useNpcWander";
 import StatsHud from "./StatsHud";
 import FieldMap from "./FieldMap";
 import VirtualJoystick from "./VirtualJoystick";
@@ -46,7 +46,7 @@ export default function GameScreen({
   const roaming = phase.kind === "roam";
 
   const npcDefs = useMemo(
-    () => (roaming ? (event.npcs ?? []) : []),
+    () => (roaming ? (event.npcs ?? EMPTY_NPCS) : EMPTY_NPCS),
     [roaming, event.npcs],
   );
   const npcStates = useNpcWander(npcDefs, roaming);
@@ -85,11 +85,12 @@ export default function GameScreen({
     () =>
       npcDefs.map((npc, i) => {
         const st = npcStates[i];
-        const movingNpc = st.dir.x !== 0 || st.dir.y !== 0;
+        const pos = st?.pos ?? npc.position;
+        const movingNpc = st ? st.dir.x !== 0 || st.dir.y !== 0 : false;
         return {
           ...npc,
-          pos: st.pos,
-          facing: (st.dir.x < 0 ? "left" : "right") as "left" | "right",
+          pos,
+          facing: (st && st.dir.x < 0 ? "left" : "right") as "left" | "right",
           moving: movingNpc,
         };
       }),

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { MapPosition, Npc } from "@/lib/types";
 import { DEFAULT_BOUNDS, NPC_SPEED, clampPosition } from "@/lib/field";
 
@@ -10,31 +10,44 @@ type NpcState = {
   wait: number;
 };
 
+const EMPTY_NPCS: Npc[] = [];
+
 function randomDir() {
   const angle = Math.random() * Math.PI * 2;
   return { x: Math.cos(angle), y: Math.sin(angle) };
 }
 
+function createInitialState(npc: Npc): NpcState {
+  return {
+    pos: { ...npc.position },
+    dir: randomDir(),
+    wait: Math.random() * 2,
+  };
+}
+
+function npcListKey(npcs: Npc[]): string {
+  return npcs
+    .map((n) => `${n.name}:${n.sprite}:${n.position.x},${n.position.y}`)
+    .join("|");
+}
+
 /** マップ上を歩き回るNPC */
 export function useNpcWander(npcs: Npc[], active: boolean) {
+  const npcKey = useMemo(() => npcListKey(npcs), [npcs]);
   const [states, setStates] = useState<NpcState[]>(() =>
-    npcs.map((n) => ({
-      pos: { ...n.position },
-      dir: randomDir(),
-      wait: Math.random() * 2,
-    })),
+    npcs.map(createInitialState),
   );
 
   // NPCリストが変わったらリセット
   useEffect(() => {
-    setStates(
-      npcs.map((n) => ({
-        pos: { ...n.position },
-        dir: randomDir(),
-        wait: Math.random() * 2,
-      })),
-    );
-  }, [npcs]);
+    setStates(npcs.map(createInitialState));
+  }, [npcKey, npcs]);
+
+  // roam開始直後など、state更新前でもNPC座標を参照できるように同期
+  const alignedStates = useMemo(
+    () => npcs.map((npc, i) => states[i] ?? createInitialState(npc)),
+    [npcs, states],
+  );
 
   useEffect(() => {
     if (!active || npcs.length === 0) return;
@@ -47,8 +60,8 @@ export function useNpcWander(npcs: Npc[], active: boolean) {
       last = now;
 
       setStates((prev) =>
-        prev.map((s, i) => {
-          const npc = npcs[i];
+        npcs.map((npc, i) => {
+          const s = prev[i] ?? createInitialState(npc);
           if (npc.wander === false) return s;
 
           let { pos, dir, wait } = s;
@@ -69,7 +82,6 @@ export function useNpcWander(npcs: Npc[], active: boolean) {
               x: pos.x + dir.x * NPC_SPEED * dt,
               y: pos.y + dir.y * NPC_SPEED * dt * 0.75,
             });
-            // 端に当たったら方向転換
             if (
               pos.x <= DEFAULT_BOUNDS.minX + 1 ||
               pos.x >= DEFAULT_BOUNDS.maxX - 1
@@ -93,7 +105,9 @@ export function useNpcWander(npcs: Npc[], active: boolean) {
 
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [active, npcs]);
+  }, [active, npcKey, npcs]);
 
-  return states;
+  return alignedStates;
 }
+
+export { EMPTY_NPCS };
