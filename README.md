@@ -16,6 +16,13 @@ npm run dev
 
 ブラウザで <http://localhost:3000> を開きます。スマホ縦画面を想定しているため、PCではブラウザの開発者ツールでモバイル表示にすると雰囲気が出ます。
 
+## Web公開 (GitHub Pages)
+
+`main` ブランチへの push で GitHub Actions が自動デプロイします。
+
+- 公開URL: <https://dai-robot.github.io/life/>
+- 初回はリポジトリの **Settings → Pages → Build and deployment → Source: GitHub Actions** を有効にしてください
+
 ## 操作方法
 
 RPGのようにキャラクターを自由に歩かせて人生を選びます。
