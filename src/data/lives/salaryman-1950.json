@@ -1,0 +1,176 @@
+{
+  "id": "salaryman-1950",
+  "title": "1950年生まれのサラリーマン",
+  "subtitle": "戦後の日本を駆け抜けた、ある会社員の一生",
+  "birthYear": 1950,
+  "character": "salaryman",
+  "intro": {
+    "background": "school",
+    "character": "student",
+    "text": "あなたは1950年、日本に生まれました。\n戦争の傷跡が残る町も、少しずつ元気を取り戻しています。\n\nあなたは15歳になりました。"
+  },
+  "events": [
+    {
+      "age": 15,
+      "background": "school",
+      "character": "student",
+      "title": "進路",
+      "text": "中学卒業が近づいてきました。まわりでは「金の卵」と呼ばれる集団就職も盛んです。あなたはどうしますか？",
+      "npcs": [
+        { "name": "友達・太郎", "sprite": "friend", "position": { "x": 28, "y": 74 }, "text": "今日も野球しようぜ！" },
+        { "name": "担任", "sprite": "elder", "position": { "x": 72, "y": 50 }, "text": "進路、真剣に考えるのじゃぞ。", "wander": false }
+      ],
+      "choices": [
+        {
+          "text": "高校へ進学する",
+          "position": { "x": 16, "y": 54 },
+          "result": "参考書を抱えて高校へ。学生生活はまぶしく、未来はまだ真っ白です。",
+          "effects": { "happiness": 1, "wealth": -1, "fame": 1 }
+        },
+        {
+          "text": "集団就職で働きに出る",
+          "position": { "x": 50, "y": 46 },
+          "result": "夜行列車で都会へ。慣れない仕事は大変ですが、初めての給料袋は重く感じました。",
+          "effects": { "wealth": 2, "happiness": -1, "family": -1 }
+        },
+        {
+          "text": "友達と遊びまわる",
+          "position": { "x": 84, "y": 54 },
+          "result": "空き地で野球、駄菓子屋で買い食い。一生ものの友達ができました。",
+          "effects": { "happiness": 2, "fame": -1 }
+        }
+      ]
+    },
+    {
+      "age": 20,
+      "background": "office",
+      "title": "高度経済成長",
+      "text": "日本は高度経済成長の真っただ中。あなたも会社に入社しました。国じゅうが上を向いて働いています。",
+      "npcs": [
+        { "name": "先輩社員", "sprite": "colleague", "position": { "x": 35, "y": 68 }, "text": "残業、付き合ってくれよ。" },
+        { "name": "部長", "sprite": "elder", "position": { "x": 70, "y": 48 }, "text": "日本の未来は若者の肩にかかっている。", "wander": false }
+      ],
+      "choices": [
+        {
+          "text": "猛烈に働く",
+          "position": { "x": 18, "y": 52 },
+          "result": "「モーレツ社員」と呼ばれるほど働きました。給料も少しずつ上がっていきます。",
+          "effects": { "wealth": 2, "fame": 1, "happiness": -1 }
+        },
+        {
+          "text": "同僚との付き合いを大切にする",
+          "position": { "x": 50, "y": 44 },
+          "result": "仕事終わりの一杯と休日の草野球。職場に居場所ができました。",
+          "effects": { "happiness": 2, "family": 1 }
+        },
+        {
+          "text": "夜間学校で勉強する",
+          "position": { "x": 82, "y": 52 },
+          "result": "働きながら学ぶ日々。身につけた知識は、のちのち大きな武器になりそうです。",
+          "effects": { "fame": 2, "happiness": -1, "wealth": 1 }
+        }
+      ]
+    },
+    {
+      "age": 30,
+      "background": "home",
+      "title": "結婚と住まい",
+      "text": "お見合いで出会った人と結婚しました。そろそろ住まいのことも考える年ごろです。",
+      "npcs": [
+        { "name": "妻", "sprite": "lady", "position": { "x": 40, "y": 66 }, "text": "のんびりしていないで、ね。", "wander": false },
+        { "name": "不動産屋", "sprite": "merchant", "position": { "x": 75, "y": 58 }, "text": "今が買い時ですよ！" }
+      ],
+      "choices": [
+        { "text": "ローンでマイホームを買う", "position": { "x": 20, "y": 50 },
+          "result": "庭付きの小さな一軒家。ローンは重いけれど、玄関の表札がまぶしく見えます。",
+          "effects": { "family": 2, "happiness": 1, "wealth": -2 }
+        },
+        { "text": "社宅で堅実に暮らす", "position": { "x": 50, "y": 44 },
+          "result": "家賃を抑えてコツコツ貯金。狭いながらも楽しい我が家です。",
+          "effects": { "wealth": 1, "family": 1 }
+        },
+        { "text": "仕事最優先で頑張る", "position": { "x": 80, "y": 50 },
+          "result": "残業続きで家は寝に帰るだけ。課長への道は近づきましたが、少し寂しい夕飯です。",
+          "effects": { "fame": 2, "wealth": 1, "family": -2 }
+        }
+      ]
+    },
+    {
+      "age": 40,
+      "background": "city",
+      "title": "バブル景気",
+      "text": "時はバブル景気。株も土地も値上がりし、街はネオンで輝いています。同僚は「今買わないと損だ」と言いますが……。",
+      "choices": [
+        {
+          "text": "株と土地に投資する",
+          "result": "資産はみるみる膨らみました。通帳を見るたび、少し怖いくらいです。",
+          "effects": { "wealth": 2, "happiness": 1, "family": -1 }
+        },
+        {
+          "text": "堅実に貯金する",
+          "result": "「つまらない男だ」と笑われましたが、あなたはコツコツ道を選びました。",
+          "effects": { "wealth": 1, "fame": -1, "happiness": 1 }
+        },
+        {
+          "text": "家族と旅行を楽しむ",
+          "result": "初めての家族での温泉旅行。子どもの笑顔は、どんな株よりも値上がりしました。",
+          "effects": { "family": 2, "happiness": 2, "wealth": -1 }
+        }
+      ]
+    },
+    {
+      "age": 50,
+      "background": "office",
+      "title": "バブル崩壊",
+      "text": "バブルが崩壊し、会社の業績も急降下。リストラの噂が廊下をかけめぐります。あなたはどうしますか？",
+      "choices": [
+        {
+          "text": "思い切って転職する",
+          "result": "50歳での再出発。給料は下がりましたが、新しい職場には新しい風が吹いていました。",
+          "effects": { "happiness": 1, "wealth": -1, "fame": 1 }
+        },
+        {
+          "text": "単身赴任を受け入れる",
+          "result": "地方の支社へ一人で赴任。週末の電話口から聞こえる家族の声が支えです。",
+          "effects": { "wealth": 1, "fame": 1, "family": -1, "happiness": -1 }
+        },
+        {
+          "text": "会社に残って耐える",
+          "result": "後輩を守りながら、じっと嵐が過ぎるのを待ちました。あなたの背中を見ている人がいます。",
+          "effects": { "fame": 1, "family": 1, "wealth": -1 }
+        }
+      ]
+    },
+    {
+      "age": 60,
+      "background": "park",
+      "title": "定年退職",
+      "text": "長かった会社員生活も今日でおしまい。花束を抱えて会社を出ると、夕焼けがやけにきれいでした。これからどう生きますか？",
+      "choices": [
+        {
+          "text": "趣味に打ち込む",
+          "result": "念願だったカメラと登山。人生でいちばん自由な時間が始まりました。",
+          "effects": { "happiness": 2, "wealth": -1 }
+        },
+        {
+          "text": "再雇用でもうひと働き",
+          "result": "培った経験で若手を支える日々。「まだまだ現役」が口ぐせです。",
+          "effects": { "wealth": 1, "fame": 1 }
+        },
+        {
+          "text": "孫と過ごす",
+          "result": "小さな手を引いて公園へ。孫の「じいじ」という声が、何よりのごほうびです。",
+          "effects": { "family": 2, "happiness": 1 }
+        }
+      ]
+    }
+  ],
+  "epilogue": {
+    "title": "実際の歴史",
+    "lines": [
+      "1950年生まれの世代は、焼け跡から立ち上がる日本とともに育ちました。",
+      "高度経済成長、東京オリンピック、バブル景気とその崩壊、そしてIT革命。",
+      "激動の時代を働き抜いたこの世代が、今の日本の暮らしの土台を築きました。"
+    ]
+  }
+}

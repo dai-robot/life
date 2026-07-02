@@ -1,0 +1,140 @@
+{
+  "id": "samurai-1700",
+  "title": "1700年生まれの武士",
+  "subtitle": "泰平の世を生きた、ある侍の一生",
+  "birthYear": 1700,
+  "character": "samurai",
+  "intro": {
+    "background": "dojo",
+    "character": "wakamusha",
+    "text": "あなたは元禄の世が終わるころ、1700年に武士の家に生まれました。\n戦のない泰平の世。刀は差していても、武士の仕事は変わりつつあります。\n\nあなたは15歳になりました。"
+  },
+  "events": [
+    {
+      "age": 15,
+      "background": "dojo",
+      "character": "wakamusha",
+      "title": "修行",
+      "text": "元服を迎え、一人前の武士への修行が始まります。何にいちばん打ち込みますか？",
+      "npcs": [
+        { "name": "師範", "sprite": "samurai", "position": { "x": 50, "y": 46 }, "text": "心を乱すな。修行は日々の積み重ねだ。", "wander": false },
+        { "name": "同輩", "sprite": "wakamusha", "position": { "x": 25, "y": 70 }, "text": "今日の素振り、千回超えたか？" }
+      ],
+      "choices": [
+        { "text": "剣術に励む", "position": { "x": 18, "y": 52 },
+          "result": "毎朝素振り千回。道場でその名を知らぬ者はいなくなりました。",
+          "effects": { "fame": 2, "happiness": 1, "wealth": -1 }
+        },
+        { "text": "学問に励む", "position": { "x": 50, "y": 44 },
+          "result": "論語をそらんじ、算術も学びました。「あの家の子は賢い」と評判です。",
+          "effects": { "fame": 1, "wealth": 1 }
+        },
+        { "text": "礼儀作法を磨く", "position": { "x": 82, "y": 52 },
+          "result": "茶の湯に謡に立ち居振る舞い。どこに出しても恥ずかしくない侍になりました。",
+          "effects": { "fame": 1, "family": 1, "happiness": 1 }
+        }
+      ]
+    },
+    {
+      "age": 20,
+      "background": "castle",
+      "title": "仕官",
+      "text": "いよいよ藩にお仕えする歳になりました。どの役目を志願しますか？",
+      "choices": [
+        {
+          "text": "勘定方（藩の経理）",
+          "result": "そろばん片手に藩の台所を支える日々。地味ですが、藩の要です。",
+          "effects": { "wealth": 2, "fame": -1, "happiness": 1 }
+        },
+        {
+          "text": "馬廻り（殿の護衛）",
+          "result": "殿の側近くに仕える誉れ高き役目。緊張の毎日ですが、胸を張って歩けます。",
+          "effects": { "fame": 2, "happiness": -1 }
+        },
+        {
+          "text": "学問所で教える",
+          "result": "藩校で子どもたちに読み書きを教えます。教え子の成長が何よりの楽しみです。",
+          "effects": { "happiness": 2, "family": 1, "wealth": -1 }
+        }
+      ]
+    },
+    {
+      "age": 35,
+      "background": "village",
+      "title": "村の凶作",
+      "text": "郡奉行として村々を治める立場になりました。今年は長雨で凶作。年貢の取り立てをどうしますか？",
+      "npcs": [
+        { "name": "農民", "sprite": "farmer", "position": { "x": 30, "y": 72 }, "text": "侍さま、どうかお助けを……" },
+        { "name": "村長", "sprite": "elder", "position": { "x": 68, "y": 55 }, "text": "年貢のこと、相談があります。" }
+      ],
+      "choices": [
+        { "text": "定めどおり取り立てる", "position": { "x": 20, "y": 50 },
+          "result": "お役目は果たしましたが、村人たちの沈んだ顔が頭から離れません。",
+          "effects": { "wealth": 1, "fame": 1, "happiness": -2 }
+        },
+        { "text": "年貢を減らすよう藩に掛け合う", "position": { "x": 50, "y": 44 },
+          "result": "上役に頭を下げ続け、なんとか減免が認められました。村人はあなたを恩人と呼びます。",
+          "effects": { "happiness": 2, "fame": 1, "wealth": -1 }
+        },
+        { "text": "村人と共に堤を築く", "position": { "x": 80, "y": 50 },
+          "result": "泥だらけになって治水に汗を流しました。「侍さまが一緒に働いてくれた」と語り草になりました。",
+          "effects": { "fame": 2, "family": 1, "wealth": -1 }
+        }
+      ]
+    },
+    {
+      "age": 50,
+      "background": "castle",
+      "title": "藩政改革",
+      "text": "藩の借金は膨らむばかり。若い改革派が倹約と特産品づくりを唱え、藩は真っ二つに割れています。",
+      "choices": [
+        {
+          "text": "改革の先頭に立つ",
+          "result": "恨みも買いましたが、藩の台所は少しずつ持ち直しました。あなたの名は藩史に残ります。",
+          "effects": { "fame": 2, "wealth": 1, "happiness": -1, "family": -1 }
+        },
+        {
+          "text": "慎重に間を取り持つ",
+          "result": "対立する両派の間を奔走。派手さはないものの、藩の分裂を防いだのはあなたでした。",
+          "effects": { "happiness": 1, "fame": 1, "family": 1 }
+        },
+        {
+          "text": "静かに距離を置く",
+          "result": "政争から離れ、家族との時間を選びました。庭の梅がきれいに咲いています。",
+          "effects": { "family": 2, "happiness": 1, "fame": -1 }
+        }
+      ]
+    },
+    {
+      "age": 60,
+      "background": "washitsu",
+      "title": "家督",
+      "text": "還暦を迎え、そろそろ家督を譲る頃合いです。隠居後は何をして過ごしますか？",
+      "choices": [
+        {
+          "text": "息子に全て任せ庭いじり",
+          "result": "盆栽と菜園の毎日。孫を膝にのせて縁側で日向ぼっこ。悪くない隠居です。",
+          "effects": { "family": 2, "happiness": 2 }
+        },
+        {
+          "text": "若い藩士を育てる",
+          "result": "道場と藩校で若者に稽古をつけます。「ご隠居」と呼ばれても腕は錆びていません。",
+          "effects": { "fame": 2, "happiness": 1 }
+        },
+        {
+          "text": "回想録を書き残す",
+          "result": "自分の生きた泰平の世を筆に残しました。その記録は後の世の宝になります。",
+          "effects": { "fame": 1, "happiness": 1, "family": 1 }
+        }
+      ]
+    }
+  ],
+  "epilogue": {
+    "title": "実際の歴史",
+    "lines": [
+      "1700年ごろに生まれた武士は、戦のない「泰平の世」を生きました。",
+      "刀を振るう代わりに、行政官として藩を支え、学問や文化を花開かせた時代です。",
+      "享保の改革など、財政難と改革に向き合ったその姿は、どこか現代の会社員にも重なります。"
+    ]
+  }
+}

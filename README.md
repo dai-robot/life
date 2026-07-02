@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LIFE JOURNEY（仮）
 
-## Getting Started
+歴史上のさまざまな時代の人物になり、その人生を5〜10分で追体験するシミュレーションゲームの試作品です。
 
-First, run the development server:
+## 遊べる人生
+
+- 1950年生まれの日本人サラリーマン
+- 1700年生まれの日本の武士
+
+## 起動方法
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ブラウザで <http://localhost:3000> を開きます。スマホ縦画面を想定しているため、PCではブラウザの開発者ツールでモバイル表示にすると雰囲気が出ます。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 操作方法
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+RPGのようにキャラクターを自由に歩かせて人生を選びます。
 
-## Learn More
+- **移動** … 左下のジョイスティック / フィールドをドラッグ (スマホ) / 矢印キー・WASD (PC)
+- **決定** … Aボタン (PCは Space / Enter / Z)
+- 各年齢のマップに選択肢が「！」マーカーとして置かれています。近づくと吹き出しが出るので、Aボタンで決定
+- マップ上のNPCに近づくとセリフが表示されます (会話は世界観づくり、選択には影響しません)
+- メッセージ表示中は画面タップ (または決定キー) で文字送り・次へ進みます
+- マップは画面より広く、カメラが主人公についてスクロールします
 
-To learn more about Next.js, take a look at the following resources:
+## 技術構成
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Next.js (App Router) / TypeScript / React / Tailwind CSS
+- PWA対応 (`src/app/manifest.ts`)。ホーム画面に追加して縦画面スタンドアロンで遊べます
+- BGMはWeb Audioでコード生成 (音源ファイル不要)。画面右下の「♪」ボタンで再生
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ディレクトリ構成と人生の追加方法
 
-## Deploy on Vercel
+人生データはコードに直接書かず、JSONファイルで管理しています。
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```text
+src/
+  data/lives/          … 人生データ (JSON)。1ファイル = 1つの人生
+    salaryman-1950.json
+    samurai-1700.json
+  lib/
+    types.ts           … 人生データの型定義
+    lives.ts           … 人生レジストリ (JSONを読み込んで一覧化)
+    game.ts            … パラメータ計算などのゲームロジック
+    useBgm.ts          … Web Audio によるBGM
+  components/
+    TitleScreen.tsx    … タイトル画面
+    GameScreen.tsx     … 人生プレイ画面 (フィールド移動・マーカー・メッセージ)
+    FieldMap.tsx       … スクロールする広いマップ + NPC/マーカー
+    VirtualJoystick.tsx… アナログスティック
+    EndingScreen.tsx   … エンディング (星評価 + 実際の歴史)
+    PixelCharacter.tsx … ドット絵キャラ (歩行アニメ付き)
+    StatsHud.tsx       … 幸福/財産/名声/家族のミニ表示
+  hooks/
+    useFieldMovement.ts … 移動ループ
+    useNpcWander.ts       … NPCの徘徊AI
+public/backgrounds/    … ドット絵背景 (bg-{id}.png)
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+新しい人生を追加する手順:
+
+1. `src/data/lives/` に JSON を追加する (`types.ts` の `Life` 型に従う)
+2. 必要なら `public/backgrounds/` に `bg-{背景ID}.png` を追加する
+3. `src/lib/lives.ts` の `LIVES` 配列に1行追加する
+
+選択肢マーカーの位置は自動配置されますが、JSONの各選択肢に `"position": { "x": 30, "y": 60 }` (背景に対する%座標) を書くと好きな場所に置けます。`npcs` 配列で歩き回る住人も追加できます。
+
+これだけでタイトル画面に自動で並び、100種類以上の人生にも対応できます。
+
+## パラメータ
+
+各選択で「幸福・財産・名声・家族」(0〜10) が変化し、エンディングで星1〜5に換算して表示されます。

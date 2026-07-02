@@ -1,26 +1,73 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-pixel: var(--font-dot), "DotGothic16", monospace;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #020617;
+  font-family: var(--font-pixel);
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pixelated {
+  image-rendering: pixelated;
+}
+
+@keyframes bg-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-bg-fade {
+  animation: bg-fade 0.8s ease-out both;
+}
+
+@keyframes char-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 6px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.animate-char-in {
+  animation: char-in 0.6s ease-out both;
+}
+
+@keyframes marker-bob {
+  0%,
+  100% {
+    transform: rotate(45deg) translate(0, 0);
+  }
+  50% {
+    transform: rotate(45deg) translate(-3px, -3px);
+  }
+}
+
+.animate-marker-bob {
+  animation: marker-bob 1.1s ease-in-out infinite;
+}
+
+@keyframes stat-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-stat-in {
+  animation: stat-in 0.5s ease-out forwards;
 }
