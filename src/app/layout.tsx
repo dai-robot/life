@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { DotGothic16 } from "next/font/google";
+import { asset } from "@/lib/basePath";
 import "./globals.css";
 
 const dotGothic = DotGothic16({
@@ -11,7 +12,7 @@ const dotGothic = DotGothic16({
 export const metadata: Metadata = {
   title: "LIFE JOURNEY",
   description: "歴史上のさまざまな人生を5〜10分で追体験するシミュレーションゲーム",
-  manifest: "/manifest.webmanifest",
+  manifest: asset("/manifest.webmanifest"),
   appleWebApp: {
     capable: true,
     title: "LIFE JOURNEY",
